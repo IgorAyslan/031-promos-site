@@ -1,0 +1,74 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.2 0.06 258);
+  --foreground: oklch(0.98 0.005 250);
+  --card: oklch(0.26 0.07 258);
+  --card-foreground: oklch(0.98 0.005 250);
+  --primary: oklch(0.72 0.19 150);
+  --primary-foreground: oklch(0.99 0 0);
+  --muted: oklch(0.3 0.07 258);
+  --muted-foreground: oklch(0.78 0.04 250);
+  --accent: oklch(0.74 0.18 55);
+  --accent-foreground: oklch(0.2 0.06 258);
+  --border: oklch(0.36 0.07 258);
+  --whatsapp: oklch(0.72 0.19 150);
+  --whatsapp-deep: oklch(0.6 0.16 150);
+}
+
+body { font-family: "Montserrat", system-ui, sans-serif; margin: 0; }
+
+@utility brand-bg {
+  background: radial-gradient(ellipse at top, oklch(0.3 0.09 258), var(--background) 60%);
+}
+@utility btn-whatsapp {
+  background: linear-gradient(180deg, var(--whatsapp), var(--whatsapp-deep));
+  color: var(--primary-foreground);
+  box-shadow: 0 12px 30px -8px color-mix(in oklab, var(--whatsapp) 70%, transparent);
+  animation: pulse-soft 2.4s ease-in-out infinite;
+}
+@utility animate-tap {
+  animation: tap 0.35s ease-out !important;
+}
+@utility bg-blob {
+  position: absolute; border-radius: 9999px; filter: blur(60px); opacity: 0.28;
+  animation: drift 14s ease-in-out infinite;
+}
+@utility bg-spark {
+  position: absolute; bottom: -10px; width: 6px; height: 6px; border-radius: 9999px;
+  background: var(--accent); opacity: 0; animation: rise 9s linear infinite;
+}
+@keyframes drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(40px,-30px) scale(1.15); } }
+@keyframes rise { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: .7; } 100% { transform: translateY(-105dvh); opacity: 0; } }
+@keyframes tap { 0% { transform: scale(1); } 40% { transform: scale(0.9); } 100% { transform: scale(1); } }
+@keyframes pulse-soft { 0%,100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+
+@layer base {
+  * { border-color: var(--color-border); }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
